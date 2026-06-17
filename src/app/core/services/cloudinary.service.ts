@@ -59,7 +59,7 @@ export class CloudinaryService {
     // ou juste un nom de fichier → construire l'URL complète sans doubler /uploads/
     if (!url.startsWith("http")) {
       const path = url.startsWith("/uploads/") ? url : `/uploads/${url}`;
-      return `http://localhost:8080/api${path}`;
+      return `https://bydjobackend-vmix.onrender.com/api${path}`;
     }
 
     // URL déjà complète mais pas Cloudinary → retourner telle quelle

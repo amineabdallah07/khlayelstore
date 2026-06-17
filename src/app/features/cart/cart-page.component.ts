@@ -219,7 +219,7 @@ export class CartPageComponent {
 
     // ✅ URL locale → on préfixe avec l'adresse du backend
     const path = url.startsWith("/") ? url : "/" + url;
-    return `http://localhost:8080/api${path}`;
+    return `https://bydjobackend-vmix.onrender.com/api${path}`;
   }
 
   // Quand l'image ne charge pas → remplace par le placeholder SVG
