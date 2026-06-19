@@ -137,24 +137,16 @@ import { environment } from "../../../environments/environment";
                   <div class="w-5 h-5 border-2 border-primary-500 border-t-transparent rounded-full animate-spin"></div>
                 </div>
               } @else {
-                <div class="flex items-center gap-3 mb-4">
+                <div class="flex items-center gap-3">
                   <div class="bg-primary-500/10 rounded-xl px-4 py-3 flex-1 text-center">
-                    <p class="text-2xl font-black text-primary-400">{{ scanStats()?.total ?? 0 }}</p>
-                    <p class="text-dark-500 text-xs">Scans total</p>
+                    <p class="text-2xl font-black text-primary-400">{{ scanStats()?.today ?? 0 }}</p>
+                    <p class="text-dark-500 text-xs">Aujourd'hui</p>
+                  </div>
+                  <div class="bg-dark-800/50 rounded-xl px-4 py-3 flex-1 text-center">
+                    <p class="text-2xl font-black text-dark-100">{{ scanStats()?.total ?? 0 }}</p>
+                    <p class="text-dark-500 text-xs">Total</p>
                   </div>
                 </div>
-                @if (scanStats()?.daily?.length) {
-                  <div class="space-y-1.5">
-                    @for (day of scanStats()?.daily; track day.date) {
-                      <div class="flex items-center justify-between bg-dark-800/50 rounded-lg px-3 py-2 text-sm">
-                        <span class="text-dark-400">{{ day.date | date:'dd/MM/yyyy' }}</span>
-                        <span class="text-dark-100 font-bold">{{ day.count }} scan{{ day.count > 1 ? 's' : '' }}</span>
-                      </div>
-                    }
-                  </div>
-                } @else {
-                  <p class="text-dark-600 text-sm text-center">Aucun scan pour le moment</p>
-                }
               }
             </div>
           </div>

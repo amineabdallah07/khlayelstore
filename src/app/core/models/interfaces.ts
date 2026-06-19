@@ -269,7 +269,7 @@ export interface QrOrderItem {
 
 export interface QrScanStats {
   total: number;
-  daily: { date: string; count: number }[];
+  today: number;
 }
 
 export interface ApiResponse<T> {
