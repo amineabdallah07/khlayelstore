@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { ApiService } from './api.service';
 import { Observable } from 'rxjs';
-import { ApiResponse, QrCode, QrCodeStats, QrOrderItem } from '../models/interfaces';
+import { ApiResponse, QrCode, QrCodeStats, QrOrderItem, QrScanStats } from '../models/interfaces';
 
 @Injectable({ providedIn: 'root' })
 export class QrService {
@@ -43,5 +43,9 @@ export class QrService {
 
   updateMyQrContent(qrCode: string, content: string): Observable<ApiResponse<void>> {
     return this.api.put(`qr/my-tshirts/${qrCode}/content`, { content });
+  }
+
+  getQrScanStats(qrCode: string): Observable<ApiResponse<QrScanStats>> {
+    return this.api.get(`qr/my-tshirts/${qrCode}/scans`);
   }
 }

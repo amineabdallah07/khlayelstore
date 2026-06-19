@@ -267,6 +267,11 @@ export interface QrOrderItem {
   createdAt: string;
 }
 
+export interface QrScanStats {
+  total: number;
+  daily: { date: string; count: number }[];
+}
+
 export interface ApiResponse<T> {
   success: boolean;
   message?: string;

@@ -2,7 +2,7 @@ import { Component, OnInit, signal } from "@angular/core";
 import { CommonModule } from "@angular/common";
 import { FormsModule } from "@angular/forms";
 import { QrService } from "../../core/services/qr.service";
-import { QrOrderItem } from "../../core/models/interfaces";
+import { QrOrderItem, QrScanStats } from "../../core/models/interfaces";
 import { environment } from "../../../environments/environment";
 
 @Component({
@@ -29,19 +29,23 @@ import { environment } from "../../../environments/environment";
             </div>
           } @else {
             <div class="space-y-4">
-              @for (item of items(); track item.id) {
-                <div class="bg-dark-800/50 rounded-xl p-5 border border-dark-700 cursor-pointer hover:border-primary-500/50 transition-all"
+              @for (item of items(); track item.id; let i = $index) {
+                <div class="bg-dark-800/50 rounded-xl p-4 border border-dark-700 cursor-pointer hover:border-primary-500/50 transition-all"
                   (click)="selectItem(item)">
-                  <div class="flex items-center justify-between">
-                    <div>
-                      <p class="text-dark-100 font-bold text-lg">{{ item.productName }}</p>
-                      <p class="text-dark-500 text-sm mt-1">
-                        {{ item.qrType === 'PHOTO' ? '📷 Photo' : '🔗 Lien' }} ·
-                        Commande {{ item.orderNumber }} ·
-                        {{ item.createdAt | date:'dd/MM/yyyy' }}
+                  <div class="flex items-center gap-4">
+                    <div class="w-10 h-10 rounded-lg bg-primary-500/20 text-primary-400 font-bold flex items-center justify-center shrink-0 text-sm">
+                      {{ i + 1 }}
+                    </div>
+                    <div class="w-14 h-14 bg-white rounded-lg p-1 shrink-0">
+                      <img [src]="qrImageUrl(item.qrCode)" alt="QR" class="w-full h-full object-contain" />
+                    </div>
+                    <div class="flex-1 min-w-0">
+                      <p class="text-dark-100 font-bold">{{ item.productName }}</p>
+                      <p class="text-dark-500 text-xs mt-0.5 truncate">
+                        {{ item.qrType === 'PHOTO' ? '📷 Photo' : '🔗 Lien' }} &middot; Cde {{ item.orderNumber }}
                       </p>
                     </div>
-                    <div class="text-primary-400">
+                    <div class="text-primary-400 shrink-0">
                       <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
                       </svg>
@@ -53,7 +57,7 @@ import { environment } from "../../../environments/environment";
           }
 
           <a routerLink="/account" class="block mt-6 text-dark-500 hover:text-primary-400 text-sm transition-colors">
-            ← Retour au compte
+            &larr; Retour au compte
           </a>
         </div>
       </div>
@@ -125,6 +129,34 @@ import { environment } from "../../../environments/environment";
                 </button>
               </div>
             }
+
+            <div class="border-t border-dark-800 pt-5">
+              <h3 class="text-dark-500 text-xs uppercase tracking-wider mb-3">Statistiques de scan</h3>
+              @if (scanStatsLoading()) {
+                <div class="flex justify-center py-3">
+                  <div class="w-5 h-5 border-2 border-primary-500 border-t-transparent rounded-full animate-spin"></div>
+                </div>
+              } @else {
+                <div class="flex items-center gap-3 mb-4">
+                  <div class="bg-primary-500/10 rounded-xl px-4 py-3 flex-1 text-center">
+                    <p class="text-2xl font-black text-primary-400">{{ scanStats()?.total ?? 0 }}</p>
+                    <p class="text-dark-500 text-xs">Scans total</p>
+                  </div>
+                </div>
+                @if (scanStats()?.daily?.length) {
+                  <div class="space-y-1.5">
+                    @for (day of scanStats()?.daily; track day.date) {
+                      <div class="flex items-center justify-between bg-dark-800/50 rounded-lg px-3 py-2 text-sm">
+                        <span class="text-dark-400">{{ day.date | date:'dd/MM/yyyy' }}</span>
+                        <span class="text-dark-100 font-bold">{{ day.count }} scan{{ day.count > 1 ? 's' : '' }}</span>
+                      </div>
+                    }
+                  </div>
+                } @else {
+                  <p class="text-dark-600 text-sm text-center">Aucun scan pour le moment</p>
+                }
+              }
+            </div>
           </div>
         </div>
       </div>
@@ -139,6 +171,8 @@ export class TshirtsPageComponent implements OnInit {
   saving = signal(false);
   saveSuccess = signal(false);
   saveError = signal("");
+  scanStats = signal<QrScanStats | null>(null);
+  scanStatsLoading = signal(false);
 
   constructor(private qrService: QrService) {}
 
@@ -176,6 +210,20 @@ export class TshirtsPageComponent implements OnInit {
     this.editContent = item.content || "";
     this.saveSuccess.set(false);
     this.saveError.set("");
+    this.loadScanStats(item.qrCode);
+  }
+
+  loadScanStats(qrCode: string): void {
+    this.scanStatsLoading.set(true);
+    this.qrService.getQrScanStats(qrCode).subscribe({
+      next: (res) => {
+        this.scanStatsLoading.set(false);
+        if (res.success && res.data) {
+          this.scanStats.set(res.data);
+        }
+      },
+      error: () => this.scanStatsLoading.set(false),
+    });
   }
 
   qrImageUrl(code: string): string {
