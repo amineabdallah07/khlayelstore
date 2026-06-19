@@ -3,6 +3,7 @@ import { CommonModule } from "@angular/common";
 import { FormsModule } from "@angular/forms";
 import { QrService } from "../../../core/services/qr.service";
 import { QrOrderItem } from "../../../core/models/interfaces";
+import { environment } from "../../../../environments/environment";
 
 const QR_API_BASE = "https://api.qrserver.com/v1/create-qr-code";
 
@@ -58,7 +59,7 @@ const QR_API_BASE = "https://api.qrserver.com/v1/create-qr-code";
                     </td>
                     <td class="p-4 text-dark-300 text-sm max-w-xs truncate">
                       @if (item.qrType === 'PHOTO') {
-                        <a [href]="item.content" target="_blank" class="text-primary-400 underline">Voir photo</a>
+                        <a [href]="resolvePhotoUrl(item.content)" target="_blank" class="text-primary-400 underline">Voir photo</a>
                       } @else {
                         <a [href]="item.content" target="_blank" class="text-primary-400 underline truncate block">{{ item.content }}</a>
                       }
@@ -142,7 +143,7 @@ const QR_API_BASE = "https://api.qrserver.com/v1/create-qr-code";
                 {{ item.qrType === 'PHOTO' ? '📷 Photo envoyée' : '🔗 Lien envoyé' }}
               </p>
               @if (item.qrType === 'PHOTO') {
-                <img [src]="item.content" class="w-full rounded-xl border border-dark-700 max-h-64 object-contain bg-dark-900"/>
+                <img [src]="resolvePhotoUrl(item.content)" class="w-full rounded-xl border border-dark-700 max-h-64 object-contain bg-dark-900"/>
               } @else {
                 <a [href]="item.content" target="_blank" rel="noopener noreferrer"
                   class="text-primary-400 underline break-all text-sm">{{ item.content }}</a>
@@ -201,5 +202,12 @@ export class AdminQrOrdersComponent implements OnInit {
 
   qrImageUrl(content: string): string {
     return `${QR_API_BASE}?size=300x300&data=${encodeURIComponent(content)}`;
+  }
+
+  resolvePhotoUrl(url: string): string {
+    if (url?.startsWith("/uploads/")) {
+      return `${environment.apiUrl}${url}`;
+    }
+    return url;
   }
 }

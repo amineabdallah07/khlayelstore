@@ -2,6 +2,7 @@ import { Component, OnInit, signal } from "@angular/core";
 import { CommonModule } from "@angular/common";
 import { ActivatedRoute, RouterLink } from "@angular/router";
 import { QrService } from "../../core/services/qr.service";
+import { environment } from "../../../environments/environment";
 
 @Component({
   selector: "app-qr-scan",
@@ -40,7 +41,7 @@ import { QrService } from "../../core/services/qr.service";
           <div class="max-w-2xl mx-auto text-center">
             <h1 class="text-3xl font-black text-dark-100 mb-6">Contenu QR</h1>
             <div class="rounded-2xl overflow-hidden border border-dark-800 shadow-2xl">
-              <img [src]="content()" alt="QR Content" class="w-full h-auto object-contain max-h-[70vh]" />
+              <img [src]="photoUrl" alt="QR Content" class="w-full h-auto object-contain max-h-[70vh]" />
             </div>
           </div>
         }
@@ -58,6 +59,14 @@ export class QrScanPageComponent implements OnInit {
     private route: ActivatedRoute,
     private qrService: QrService,
   ) {}
+
+  get photoUrl(): string {
+    const c = this.content();
+    if (c.startsWith("/uploads/")) {
+      return `${environment.apiUrl}${c}`;
+    }
+    return c;
+  }
 
   ngOnInit(): void {
     this.route.params.subscribe((params) => {
