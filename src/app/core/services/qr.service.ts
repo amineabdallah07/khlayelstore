@@ -36,4 +36,12 @@ export class QrService {
   deleteQrCode(id: number): Observable<ApiResponse<void>> {
     return this.api.delete(`qr/codes/${id}`);
   }
+
+  getMyQrShirts(): Observable<ApiResponse<QrOrderItem[]>> {
+    return this.api.get('qr/my-tshirts');
+  }
+
+  updateMyQrContent(qrCode: string, content: string): Observable<ApiResponse<void>> {
+    return this.api.put(`qr/my-tshirts/${qrCode}/content`, { content });
+  }
 }
