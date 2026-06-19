@@ -211,7 +211,7 @@ const QR_API_BASE = "https://api.qrserver.com/v1/create-qr-code";
                   {{ code.qrType === 'PHOTO' ? '📷 Photo' : '🔗 Lien' }}
                 </p>
                 @if (code.qrType === 'PHOTO') {
-                  <img [src]="code.content" class="w-full rounded-xl border border-dark-700 max-h-64 object-contain bg-dark-900"/>
+                  <img [src]="resolvePhotoUrl(code.content)" class="w-full rounded-xl border border-dark-700 max-h-64 object-contain bg-dark-900"/>
                 } @else {
                   <a [href]="code.content" target="_blank" rel="noopener noreferrer"
                     class="text-primary-400 underline break-all text-sm">{{ code.content }}</a>
@@ -365,5 +365,12 @@ export class AdminQrCodesComponent implements OnInit {
   qrImageUrl(code: string): string {
     const redirectUrl = `${environment.apiUrl}/qr/r/${code}`;
     return `${QR_API_BASE}?size=300x300&data=${encodeURIComponent(redirectUrl)}`;
+  }
+
+  resolvePhotoUrl(url: string | null | undefined): string {
+    if (url?.startsWith("/uploads/")) {
+      return `${environment.apiUrl}${url}`;
+    }
+    return url || "";
   }
 }
