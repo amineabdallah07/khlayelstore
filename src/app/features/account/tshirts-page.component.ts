@@ -1,6 +1,5 @@
 import { Component, OnInit, signal } from "@angular/core";
 import { CommonModule } from "@angular/common";
-import { RouterLink } from "@angular/router";
 import { FormsModule } from "@angular/forms";
 import { QrService } from "../../core/services/qr.service";
 import { QrOrderItem } from "../../core/models/interfaces";
@@ -9,7 +8,7 @@ import { environment } from "../../../environments/environment";
 @Component({
   selector: "app-tshirts",
   standalone: true,
-  imports: [CommonModule, RouterLink, FormsModule],
+  imports: [CommonModule, FormsModule],
   template: `
     <div class="pt-24 pb-20">
       <div class="page-container max-w-2xl">
@@ -60,8 +59,7 @@ import { environment } from "../../../environments/environment";
       </div>
     </div>
 
-    @if (selectedItem()) {
-      @let item = selectedItem()!;
+    @if (selectedItem(); as item) {
       <div class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-white/75 backdrop-blur-sm"
         (click)="selectedItem.set(null)">
         <div class="glass rounded-2xl w-full max-w-lg max-h-[90vh] overflow-y-auto"
@@ -79,10 +77,7 @@ import { environment } from "../../../environments/environment";
           <div class="p-6 space-y-5">
             <div class="flex items-center gap-2 text-sm text-dark-400">
               <span class="text-xs px-2 py-0.5 rounded-lg font-medium"
-                [class.bg-blue-500/20]="item.qrType === 'PHOTO'"
-                [class.text-blue-400]="item.qrType === 'PHOTO'"
-                [class.bg-green-500/20]="item.qrType === 'LINK'"
-                [class.text-green-400]="item.qrType === 'LINK'">
+                [ngClass]="item.qrType === 'PHOTO' ? 'bg-blue-500/20 text-blue-400' : 'bg-green-500/20 text-green-400'">
                 {{ item.qrType === 'PHOTO' ? '📷 Photo' : '🔗 Lien' }}
               </span>
               <span>Commande {{ item.orderNumber }}</span>
