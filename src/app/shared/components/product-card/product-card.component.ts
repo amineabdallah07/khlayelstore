@@ -54,7 +54,7 @@ import { CloudinaryService } from "../../../core/services/cloudinary.service";
             >
               <span
                 class="text-dark-600 font-black text-2xl tracking-widest opacity-30"
-                >KHLAYEL STORE</span
+                >BY DJO</span
               >
             </div>
           }
