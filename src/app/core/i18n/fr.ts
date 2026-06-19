@@ -4,7 +4,7 @@ export const fr = {
     newArrivals: 'Nouveautés',
     shop: 'Boutique',
     tshirts: 'T-Shirts',
-    sneakers: 'Sneakers',
+    shorts: 'Shorts',
     promos: 'Promos',
     login: 'Connexion',
     myAccount: 'Mon Compte',

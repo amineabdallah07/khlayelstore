@@ -309,12 +309,12 @@ export class NavbarComponent implements OnInit {
     {
       label: this.i18n.t().nav.tshirts,
       path: "/shop",
-      queryParams: { category: "1" },
+      queryParams: { category: "t-shirts" },
     },
     {
-      label: this.i18n.t().nav.sneakers,
+      label: this.i18n.t().nav.shorts,
       path: "/shop",
-      queryParams: { category: "3" },
+      queryParams: { category: "shorts" },
     },
     {
       label: this.i18n.t().nav.promos,

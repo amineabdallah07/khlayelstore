@@ -291,19 +291,28 @@ export class ShopPageComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.route.queryParams.subscribe((params) => {
-      this.selectedCategory = params["category"] ? Number(params["category"]) : null;
-      this.searchQuery = params["q"] || "";
-      this.isNew = params["filter"] === "new";
-      this.onSale = params["filter"] === "sale";
-      this.sortBy = params["filter"] === "bestseller" ? "totalSold" : "createdAt";
-      this.currentPage = 0;
-      this.loadProducts();
-    });
-
     this.productService
       .getCategories()
-      .subscribe((cats) => (this.categories = cats));
+      .subscribe((cats) => {
+        this.categories = cats;
+        this.route.queryParams.subscribe((params) => {
+          const raw = params["category"];
+          if (raw) {
+            const num = Number(raw);
+            this.selectedCategory = Number.isNaN(num)
+              ? cats.find((c) => c.slug === raw)?.id ?? null
+              : num;
+          } else {
+            this.selectedCategory = null;
+          }
+          this.searchQuery = params["q"] || "";
+          this.isNew = params["filter"] === "new";
+          this.onSale = params["filter"] === "sale";
+          this.sortBy = params["filter"] === "bestseller" ? "totalSold" : "createdAt";
+          this.currentPage = 0;
+          this.loadProducts();
+        });
+      });
   }
 
   loadProducts(): void {

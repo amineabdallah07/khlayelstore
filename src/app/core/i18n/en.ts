@@ -4,7 +4,7 @@ export const en = {
     newArrivals: 'New Arrivals',
     shop: 'Shop',
     tshirts: 'T-Shirts',
-    sneakers: 'Sneakers',
+    shorts: 'Shorts',
     promos: 'Sales',
     login: 'Login',
     myAccount: 'My Account',

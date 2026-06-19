@@ -4,7 +4,7 @@ export const ar = {
     newArrivals: 'وصل حديثاً',
     shop: 'المتجر',
     tshirts: 'تيشرتات',
-    sneakers: 'أحذية',
+    shorts: 'شورت',
     promos: 'تخفيضات',
     login: 'تسجيل الدخول',
     myAccount: 'حسابي',
