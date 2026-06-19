@@ -234,11 +234,24 @@ export interface QrCode {
   orderNumber?: string;
   qrType?: string;
   content?: string;
+  size?: string;
 }
 
 export interface QrCodeStats {
   free: number;
   assigned: number;
+  perSize?: {
+    S_free: number;
+    S_assigned: number;
+    M_free: number;
+    M_assigned: number;
+    L_free: number;
+    L_assigned: number;
+    XL_free: number;
+    XL_assigned: number;
+    unsized_free: number;
+    unsized_assigned: number;
+  };
 }
 
 export interface QrOrderItem {

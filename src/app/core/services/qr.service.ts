@@ -21,8 +21,8 @@ export class QrService {
     return this.api.get('qr/orders');
   }
 
-  generateQrCodes(count: number): Observable<ApiResponse<QrCode[]>> {
-    return this.api.post(`qr/codes/generate?count=${count}`, {});
+  generateQrCodes(count: number, size: string = ''): Observable<ApiResponse<QrCode[]>> {
+    return this.api.post(`qr/codes/generate?count=${count}&size=${size}`, {});
   }
 
   getAllQrCodes(): Observable<ApiResponse<QrCode[]>> {
