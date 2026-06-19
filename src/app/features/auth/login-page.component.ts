@@ -17,7 +17,7 @@ import { I18nService } from "../../core/services/i18n.service";
       <div class="w-full max-w-md">
         <div class="text-center mb-8">
           <h1 class="text-3xl font-black tracking-[0.2em] text-dark-100 mb-2">
-            BY DJO
+            KHLAYEL STORE
           </h1>
           <p class="text-dark-400">{{ i18n.t().login.subtitle }}</p>
         </div>
@@ -138,7 +138,7 @@ import { I18nService } from "../../core/services/i18n.service";
         </div>
 
         <p class="text-center text-dark-500 text-sm mt-6">
-          BY DJO &copy; 2024
+          KHLAYEL STORE &copy; 2024
         </p>
       </div>
     </div>

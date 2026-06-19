@@ -52,7 +52,7 @@ export const en = {
     promoTitle: 'ONGOING SALES',
     promoSubtitle: 'Up to -50% on a selection of products',
     shopPromos: 'SHOP SALES',
-    whyUs: 'Why BY DJO?',
+    whyUs: 'Why KHLAYEL STORE?',
     whyUsSubtitle: 'Quality first',
     feature1Title: 'Fast Delivery',
     feature1Desc: 'Delivery anywhere in Tunisia in 24-48h',

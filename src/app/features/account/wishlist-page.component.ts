@@ -73,7 +73,7 @@ import { Product } from "../../core/models/interfaces";
                     >
                       <span
                         class="text-dark-600 font-black text-xl tracking-widest opacity-30"
-                        >BY DJO</span
+                        >KHLAYEL STORE</span
                       >
                     </div>
                   }

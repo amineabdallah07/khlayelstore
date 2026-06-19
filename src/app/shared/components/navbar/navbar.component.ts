@@ -65,7 +65,7 @@ import { LangSwitcherComponent } from "../lang-switcher/lang-switcher.component"
           <a routerLink="/" class="flex items-center gap-2 group">
             <img
               src="/bydjo.png"
-              alt="BY DJO"
+              alt="KHLAYEL STORE"
               class="h-20 md:h-50 w-auto object-contain transition-opacity group-hover:opacity-100"
             />
           </a>

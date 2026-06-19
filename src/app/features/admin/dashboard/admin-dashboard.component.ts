@@ -14,7 +14,7 @@ import { OrderService } from "../../../core/services/order.service";
       <div>
         <h1 class="text-3xl font-black text-dark-100">Dashboard</h1>
         <p class="text-dark-400 mt-1">
-          Vue d'ensemble de votre boutique BY DJO
+          Vue d'ensemble de votre boutique KHLAYEL STORE
         </p>
       </div>
 

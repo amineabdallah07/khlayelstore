@@ -52,7 +52,7 @@ export const fr = {
     promoTitle: 'SOLDES EN COURS',
     promoSubtitle: 'Jusqu\'à -50% sur une sélection de produits',
     shopPromos: 'VOIR LES PROMOS',
-    whyUs: 'Pourquoi BY DJO ?',
+    whyUs: 'Pourquoi KHLAYEL STORE ?',
     whyUsSubtitle: 'La qualité avant tout',
     feature1Title: 'Livraison Rapide',
     feature1Desc: 'Livraison partout en Tunisie en 24-48h',

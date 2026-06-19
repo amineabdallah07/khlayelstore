@@ -52,7 +52,7 @@ export const ar = {
     promoTitle: 'تخفيضات جارية',
     promoSubtitle: 'خصومات تصل إلى 50% على منتجات مختارة',
     shopPromos: 'تسوّق التخفيضات',
-    whyUs: 'لماذا BY DJO؟',
+    whyUs: 'لماذا KHLAYEL STORE؟',
     whyUsSubtitle: 'الجودة أولاً',
     feature1Title: 'توصيل سريع',
     feature1Desc: 'توصيل في جميع أنحاء تونس في 24-48 ساعة',

@@ -29,7 +29,7 @@ export class WhatsAppButtonComponent {
 
   getWhatsAppUrl(): string {
     const number = this.whatsapp;
-    const message = "Bonjour BY DJO !";
+    const message = "Bonjour KHLAYEL STORE !";
     return (
       "https://wa.me/" + number + "?text=" + window.encodeURIComponent(message)
     );
